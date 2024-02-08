@@ -1,0 +1,26 @@
+.container{
+    background-color: white;
+    display: flex;
+    padding-top: 20px;
+}
+.episodes{
+    padding-left: 20px;
+    background-color: white;
+    width:50%;
+    border-right:black;
+}
+
+.partition{
+    border-left: 1px solid;
+    border-color: black;
+    height: 550px;
+}
+.desc{
+    padding-left: 20px;
+}
+
+.line{
+    color: grey;
+    box-shadow: 0px 0px 8px #ddd;
+    background-color: white;
+}
