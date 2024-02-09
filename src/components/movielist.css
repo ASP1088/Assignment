@@ -1,52 +1,83 @@
-.movielist-container{
-    background-color: white;
-    display: flex;
-    padding-top: 20px;
-    width:1250px;
-    font-family:Georgia, 'Times New Roman', Times, serif ;
-}
-.episodes{
-    padding-left: 20px;
-    background-color: white;
-    width:50%;
-    border-right:black;
-    column-gap: 10%;
+.movielist-container {
+  background-color: white;
+  display: flex;
+  padding-top: 20px;
+  width: 1250px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.partition{
-    border-left: 1px solid;
-    border-color: black;
-    height: 550px;
-}
-.desc{
-    padding-left: 20px;
+.episodes {
+  padding-left: 20px;
+  background-color: white;
+  width: 50%;
+  border-right: 1px solid black;
+  column-gap: 10%;
 }
 
-.line{
-    color: grey;
-    box-shadow: 0px 0px 8px #ddd;
-    background-color: white;
+.partition {
+  border-left: 1px solid;
+  border-color: black;
+  height: 550px;
 }
+
+.desc {
+  padding-left: 20px;
+}
+
+.line {
+  color: grey;
+  box-shadow: 0px 0px 8px #ddd;
+  background-color: white;
+}
+
 .column-container {
-    display: table; /* Make the container element behave like a table */
-    width: 100%; /* Set full-width to expand the whole page */
-  }
-  
-  .col1 {
-    display: table-cell; /* Make elements inside the container behave like table cells */
+  display: table;
+  width: 100%;
+}
 
+.col1,
+.col2,
+.col3 {
+  display: table-cell;
+}
+
+.col2 {
+  text-align: left;
+  padding-left: 60px;
+}
+
+.col3 {
+  text-align: right;
+  padding-right: 10px;
+}
+
+.desc {
+  padding-left: 20px;
+  width: 40%;
+}
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
   }
-  .col2 {
-    display: table-cell; /* Make elements inside the container behave like table cells */
-    text-align: left;
-    padding-left: 60px;
+
+  100% {
+      transform: rotate(360deg);
   }
-  .col3 {
-    display: table-cell; /* Make elements inside the container behave like table cells */
-    text-align: right;
-    padding-right: 10px;
-  }
-  .desc{
-    padding-left: 20px;
-    width: 40%;
-  }
+}

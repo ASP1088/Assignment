@@ -8,26 +8,22 @@ import { useState } from "react";
 
 function App(){
     const [searchTerm, setSearchTerm] = useState('');
+    const [sortOption, setSortOption] = useState('episode_id');
    
     
     const handleSearch=async(value)=>{ 
      const result = await searchData(value);
      console.log('result',result);
      setSearchTerm(value);
-
      return searchTerm;
     }
-    // const handleSort = (sort) => {
-    //     // Toggle between 'episode_id' and 'release_date' options
-    //     setSortOption((sort) => (sort === 'episode_id' ? 'release_date' : 'episode_id'));
-
-    //     return sortOption;
-    // };
-    
+    const handleSort = (sort) => {
+        setSortOption(sort);
+      };
     return(
         <React.Fragment>
-            <Navbar callback={handleSearch} />
-            <MovieList searchTerm={searchTerm} />                   
+            <Navbar callback={handleSearch} onSort={handleSort}/>
+            <MovieList searchTerm={searchTerm} sortOption={sortOption}/>                   
         </React.Fragment>
     )
     }

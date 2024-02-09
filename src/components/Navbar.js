@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function Navbar({callback, onSort}){
     const [search,setSearch]= useState('');
-    //console.log(search);
+    const [sortOption, setSortOption] = useState('episode_id');
     
     
     const handleChange =(e)=>{
@@ -12,19 +12,22 @@ function Navbar({callback, onSort}){
         setSearch(value);
         callback(value);
     }
-    // const handleClick =(e)=>{
-    //     console.log('button is clicked');
-    //     const value =e.target.value;
-    //     setSort(value);
-    //     onSort(sort);
-    // }
     
-   
+    const handleSortChange = (e) => {
+        const selectedOption = e.target.value;
+        setSortOption(selectedOption);
+        onSort(selectedOption);
+      };
     return(
         <div className="container">
-        <div>
-        <button className="sort" >Sort by</button>
-        </div>
+         <div>
+            <label htmlFor="sortDropdown">Sort by:</label>
+            <select id="sortDropdown" value={sortOption} onChange={handleSortChange}>
+            <option value="episode_id">Episode Number</option>
+             <option value="release_date">Release Date</option>
+            </select>
+      </div>
+        
         <div className="input-wrapper">
             <button className="search"><FaSearch id="search-icon" /></button>
             <input placeholder="Type to search..." value={search} onChange={handleChange}/>
