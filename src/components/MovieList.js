@@ -2,33 +2,39 @@ import './movielist.css';
 import './movielist.css';
 import { useState,useEffect } from 'react';
 import { getData, searchData } from '../api';
-import {searchMovie} from '../App';
-import axios from 'axios';
 
-function MoviesList({searchMovie}){
+function MoviesList({searchTerm,sortOption}){
         
     const [data, setData] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
+
         useEffect(() => {
-            //if (searchMovie) {
-                 console.log('hey',searchMovie)
-                // let url='https://swapi.dev/api/films/?search='+searchMovie;
-                // console.log('url',url);
-                // axios.get(url).then( res => {console.log('hello',res);setData(res.data.results)})
-                //searchData(searchMovie).then( res =>{console.log('hello',res); setData(res.data.results)})
-            //}else{
-                getData().then( res => setData(res.data.results))
+            //console.log('searchMovie',searchTerm);
+            //console.log('data',data);
+            if(searchTerm.length > 0){
+                //console.log('in if');
+                searchData(searchTerm).then(res => setData(res.data.results));
+            }else{
+                //console.log('in else');
+                getData().then(res => setData(res.data.results));
             }
-        ,[searchMovie]);
-    
-        console.log(data);
+        }
+        ,[searchTerm]);  
+       
+        const handleClick = (episode_id) => {
+            const filteredData = data.find((newItem) => newItem.episode_id === episode_id);
+            setSelectedMovie(filteredData);
+        };
         
     return(
     <div className="movielist-container">
          <div className="episodes">
             {
             data.map((item) =>
-            <div>
-                <div className='column-container'>
+            <div key={item.episode_id}> 
+                <div
+                 className='column-container' 
+                 onClick={() => handleClick(item.episode_id)}>
                     <div className='col1'>Episode {item.episode_id}</div> 
                     <div className='col2'>{item.title}</div> 
                     <div className='col3'>{item.release_date}</div> 
@@ -39,9 +45,17 @@ function MoviesList({searchMovie}){
             }
          </div>
          <div className="partition"></div>
+         
          <div className='desc'>
-                 Description
-        </div>     
+         {selectedMovie ? (
+                    <>
+                        <h2>{selectedMovie.title}</h2>
+                        <p>{selectedMovie.opening_crawl}</p>
+                    </>
+                ) : (
+                    <p>Select a movie to see the description</p>
+                )}
+            </div>
     </div>    
     );
 }

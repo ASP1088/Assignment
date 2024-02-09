@@ -1,26 +1,33 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import MovieList from "./components/MovieList";
-import { getData,searchData } from "./api";
+import { searchData } from "./api";
 import { useState } from "react";
 
 
 
 function App(){
-    const [searchMovie, setSearchMovie] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
+   
     
-    const callFromNavbar=async(value)=>{ 
-     console.log(`Value passed is ${value}`);
+    const handleSearch=async(value)=>{ 
      const result = await searchData(value);
-     setSearchMovie(result);
+     console.log('result',result);
+     setSearchTerm(value);
 
-     return searchMovie;
+     return searchTerm;
     }
+    // const handleSort = (sort) => {
+    //     // Toggle between 'episode_id' and 'release_date' options
+    //     setSortOption((sort) => (sort === 'episode_id' ? 'release_date' : 'episode_id'));
 
+    //     return sortOption;
+    // };
+    
     return(
         <React.Fragment>
-            <Navbar callback={callFromNavbar}/>
-            <MovieList  searchMovie={searchMovie} key={searchMovie}/>                   
+            <Navbar callback={handleSearch} />
+            <MovieList searchTerm={searchTerm} />                   
         </React.Fragment>
     )
     }
